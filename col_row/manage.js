@@ -10,6 +10,7 @@ class Manager
      *
      */
     #dataArray
+    
     /**
      * @callback addCallback
      * @param {RowspanType | ColspanType} element

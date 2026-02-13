@@ -1,4 +1,10 @@
 /**
+ * @callback tableCallback
+ * @param {HTMLTableSectionElement} tbody
+ * @param {ColspanType | RowspanType}
+ * @returns {void}
+ */
+/**
  * @import {FormFieldType,HeaderArrayType,ColspanType,RowspanType} from './functions.js'
  */
 
@@ -33,7 +39,14 @@ class Table{
 
         const tbody = document.createElement("tbody")
         table.appendChild(tbody)
+        this.#tbody = tbody
 
+    }
+
+    setAppendRow(){
+        this.#manager.addCallback = (element) =>{
+            tableCallback(this.#tbody, element)
+        }
     }
 }
 

@@ -3,15 +3,21 @@ import { ViewElement } from "./viewelement.js";
 
 class Table extends ViewElement{
 
-
+    /**
+     * @type {HTMLTableSectionElement}
+     */
     #tbody;
+
+    /**
+     * @type {AuthorManager}
+     */
     #manager;
 
     /**
      * 
      * @param {string} id 
      * @param {string[]} headerArray 
-     * @param {*} manager 
+     * @param {AuthorManager} manager 
      */
     constructor(id, headerArray, manager){
         super(id);
@@ -20,6 +26,18 @@ class Table extends ViewElement{
         this.div.appendChild(table);
         const thead = createTableHeader(headerArray);
         table.appendChild(thead);
+        this.#tbody = document.createElement('tbody');
+        table.appendChild(this.#tbody);
+        this.#manager.tableCallback = (authorList) => {
+            for(const author of authorList){
+                const tr = document.createElement('tr');
+                this.#tbody.appendChild(tr);
+
+                createTableCell(tr, author.name);
+                createTableCell(tr, author.work);
+                createTableCell(tr, author.concept);
+            }
+        }
     }
 }
 
